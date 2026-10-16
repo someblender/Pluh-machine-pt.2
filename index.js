@@ -1,5 +1,4 @@
 // Load environment variables
-require("dotenv").config();
 
 // Import Discord.js
 const { Client, GatewayIntentBits } = require("discord.js");
