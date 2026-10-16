@@ -1,4 +1,3 @@
-// Import Discord.js
 const { Client, GatewayIntentBits } = require("discord.js");
 
 // Create the bot client
@@ -18,7 +17,7 @@ client.once("ready", () => {
 
 // Message listener
 client.on("messageCreate", (message) => {
-    console.log("Message received:", message.content); // DEBUG LINE
+    console.log("Message received:", message.content); // DEBUG
 
     if (message.author.bot) return;
 
@@ -30,9 +29,7 @@ client.on("messageCreate", (message) => {
 // Login using Render environment variable
 client.login(process.env.DISCORD_TOKEN);
 
-// -----------------------------------------------------------------------------
 // Render FREE TIER FIX – tiny web server so Render detects an open port
-// -----------------------------------------------------------------------------
 const http = require("http");
 http.createServer((req, res) => {
     res.end("Bot is running");
