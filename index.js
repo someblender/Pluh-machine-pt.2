@@ -1,10 +1,8 @@
-const { Client, GatewayIntentBits } = require('discord.js');
-require('dotenv').config();
+// Load environment variables
+require("dotenv").config();
 
-// Configuration
-const TRIGGER_WORD = 'pluh';
-const FORWARD_CHANNEL_ID = '1560496677608095868';
-const FORWARD_MESSAGE = 'https://klipy.com/gifs/pluh-cat-2';
+// Import Discord.js
+const { Client, GatewayIntentBits } = require("discord.js");
 
 // Create the bot client
 const client = new Client({
@@ -15,27 +13,27 @@ const client = new Client({
     ]
 });
 
-client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+// Bot ready event
+client.once("ready", () => {
+    console.log(`Logged in as ${client.user.tag}`);
 });
 
-client.on('messageCreate', async (message) => {
+// Message listener
+client.on("messageCreate", (message) => {
     if (message.author.bot) return;
 
-    if (message.content.toLowerCase().includes(TRIGGER_WORD.toLowerCase())) {
-        try {
-            const targetChannel = await client.channels.fetch(FORWARD_CHANNEL_ID);
-
-            if (targetChannel && targetChannel.isTextBased()) {
-                await targetChannel.send(FORWARD_MESSAGE);
-            } else {
-                console.error('Channel not found or not text-based.');
-            }
-        } catch (error) {
-            console.error('Failed to forward message:', error);
-        }
+    if (message.content.toLowerCase() === "pluh") {
+        message.reply("pluh detected");
     }
 });
 
-// Login using your environment variable
+// Login using Render environment variable
 client.login(process.env.DISCORD_TOKEN);
+
+// ---------------------------------------------------------------------------
+// Render FREE TIER FIX — tiny web server so Render detects an open port
+// ---------------------------------------------------------------------------
+const http = require("http");
+http.createServer((req, res) => {
+    res.end("Bot is running");
+}).listen(process.env.PORT || 3000);
