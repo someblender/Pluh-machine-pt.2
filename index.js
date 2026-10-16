@@ -6,7 +6,8 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMessageReactions
     ]
 });
 
@@ -17,10 +18,11 @@ client.once("ready", () => {
 
 // Message listener
 client.on("messageCreate", (message) => {
+    console.log("Message received:", message.content); // DEBUG LINE
+
     if (message.author.bot) return;
 
-    if (message.content.toLowerCase() === "pluh") {
-        // Sends the GIF link (Discord will auto-embed it)
+    if (message.content.toLowerCase().includes("pluh")) {
         message.channel.send("https://klipy.com/gifs/pluh-cat-2");
     }
 });
@@ -28,9 +30,9 @@ client.on("messageCreate", (message) => {
 // Login using Render environment variable
 client.login(process.env.DISCORD_TOKEN);
 
-// ---------------------------------------------------------------------------
-// Render FREE TIER FIX — tiny web server so Render detects an open port
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Render FREE TIER FIX – tiny web server so Render detects an open port
+// -----------------------------------------------------------------------------
 const http = require("http");
 http.createServer((req, res) => {
     res.end("Bot is running");
