@@ -23,7 +23,8 @@ client.on("messageCreate", (message) => {
     if (message.author.bot) return;
 
     if (message.content.toLowerCase() === "pluh") {
-        message.reply("pluh detected");
+        // Sends the GIF link (Discord will auto-embed it)
+        message.channel.send("https://klipy.com/gifs/pluh-cat-2");
     }
 });
 
