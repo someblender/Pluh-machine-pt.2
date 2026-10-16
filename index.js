@@ -1,5 +1,3 @@
-// Load environment variables
-
 // Import Discord.js
 const { Client, GatewayIntentBits } = require("discord.js");
 
